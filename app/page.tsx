@@ -1,23 +1,34 @@
 import { Hero } from "@/components/sections/hero";
-import { Problem } from "@/components/sections/problem";
 import { Mission } from "@/components/sections/mission";
-import { Solution } from "@/components/sections/solution";
+import { ForPeople } from "@/components/sections/for-people";
+import { ForBusiness } from "@/components/sections/for-business";
 import { Security } from "@/components/sections/security";
 import { Waitlist } from "@/components/sections/waitlist";
 import { FAQ } from "@/components/sections/faq";
-import { Closing } from "@/components/sections/closing";
 
 export default function Home() {
   return (
     <>
+      {/* Hero Principal */}
       <Hero />
+
+      {/* Nuestro Propósito */}
       <Mission />
-      <Problem />
-      <Solution />
+
+      {/* ========== SECCIÓN PERSONAS ========== */}
+      <ForPeople />
+
+      {/* ========== SECCIÓN EMPRESAS ========== */}
+      <ForBusiness />
+
+      {/* Seguridad (aplica a ambos) */}
       <Security />
+
+      {/* Registro Beta */}
       <Waitlist />
+
+      {/* FAQ */}
       <FAQ />
-      <Closing />
     </>
   );
 }

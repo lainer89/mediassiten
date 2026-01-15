@@ -7,118 +7,86 @@ import { ShieldCheck, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const navLinks = [
-    { label: "Nuestra misión", href: "#mision" },
-    { label: "El problema", href: "#problema" },
-    { label: "Cómo funciona", href: "#como-funciona" },
+    { label: "Propósito", href: "#mision" },
+    { label: "Para Personas", href: "#personas" },
+    { label: "Para Empresas", href: "#empresas" },
     { label: "Seguridad", href: "#seguridad" },
-    { label: "Preguntas", href: "#faq" },
+    { label: "FAQ", href: "#faq" },
 ]
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    const [activeSection, setActiveSection] = useState("")
+
+    const scrollToWaitlist = () => {
+        document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })
+        setIsMobileMenuOpen(false)
+    }
 
     useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20)
-
-            // Detect active section
-            const sections = navLinks.map(link => link.href.replace('#', ''))
-            for (const section of sections.reverse()) {
-                const element = document.getElementById(section)
-                if (element) {
-                    const rect = element.getBoundingClientRect()
-                    if (rect.top <= 100) {
-                        setActiveSection(section)
-                        break
-                    }
-                }
-            }
-        }
+        const handleScroll = () => setIsScrolled(window.scrollY > 20)
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
 
     return (
-        <header
-            className={`fixed top-0 z-50 w-full transition-all duration-300 ${isScrolled
-                    ? "bg-background/95 backdrop-blur-xl border-b shadow-sm"
-                    : "bg-background/50 backdrop-blur-sm"
-                }`}
-        >
-            <Container className="flex h-16 lg:h-18 items-center justify-between">
-                {/* Logo */}
-                <Link href="/" className="flex items-center gap-2.5 group">
-                    <div className="w-9 h-9 bg-gradient-to-br from-primary to-teal-400 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform shadow-md shadow-primary/20">
+        <header className={`fixed top-0 z-50 w-full transition-all duration-200 ${isScrolled ? "bg-white shadow-sm" : "bg-white/80 backdrop-blur-sm"}`}>
+            <Container className="flex h-16 items-center justify-between">
+                <Link href="/" className="flex items-center gap-2">
+                    <div className="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center">
                         <ShieldCheck className="h-5 w-5 text-white" />
                     </div>
-                    <span className="text-lg font-bold tracking-tight text-foreground">
-                        MedAssist
-                    </span>
+                    <span className="text-lg font-bold text-gray-900">MedAssist</span>
                 </Link>
 
-                {/* Desktop Nav */}
                 <nav className="hidden lg:flex items-center gap-1">
-                    {navLinks.map((link, index) => (
+                    {navLinks.map((link, i) => (
                         <Link
-                            key={index}
+                            key={i}
                             href={link.href}
-                            className={`px-4 py-2 text-sm font-medium transition-all rounded-full ${activeSection === link.href.replace('#', '')
-                                    ? "text-primary bg-primary/10"
-                                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                                }`}
+                            className="px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
                         >
                             {link.label}
                         </Link>
                     ))}
                 </nav>
 
-                {/* CTA Button */}
                 <div className="flex items-center gap-3">
                     <Button
                         size="sm"
-                        className="hidden sm:flex h-10 px-6 rounded-full font-semibold shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-105"
+                        onClick={scrollToWaitlist}
+                        className="hidden sm:flex btn-primary h-9 px-4 text-sm font-semibold rounded-lg"
                     >
                         Unirme a la Beta
                     </Button>
 
-                    {/* Mobile Menu Button */}
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="lg:hidden"
+                    <button
+                        className="lg:hidden p-2 text-gray-600 hover:text-gray-900"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
-                        {isMobileMenuOpen ? (
-                            <X className="h-5 w-5" />
-                        ) : (
-                            <Menu className="h-5 w-5" />
-                        )}
-                        <span className="sr-only">Menú</span>
-                    </Button>
+                        {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                    </button>
                 </div>
             </Container>
 
-            {/* Mobile Menu */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden bg-background/95 backdrop-blur-xl border-b shadow-lg animate-in slide-in-from-top-2 duration-200">
+                <div className="lg:hidden bg-white border-t">
                     <Container className="py-4">
                         <nav className="flex flex-col gap-1">
-                            {navLinks.map((link, index) => (
+                            {navLinks.map((link, i) => (
                                 <Link
-                                    key={index}
+                                    key={i}
                                     href={link.href}
-                                    className={`px-4 py-3 text-sm font-medium rounded-xl transition-colors ${activeSection === link.href.replace('#', '')
-                                            ? "text-primary bg-primary/10"
-                                            : "text-muted-foreground hover:text-foreground hover:bg-muted"
-                                        }`}
+                                    className="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
-                            <Button className="mt-4 w-full rounded-full font-semibold h-12">
+                            <Button
+                                onClick={scrollToWaitlist}
+                                className="mt-4 btn-primary h-10 font-semibold rounded-lg"
+                            >
                                 Unirme a la Beta
                             </Button>
                         </nav>
