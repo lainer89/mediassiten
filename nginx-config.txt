@@ -1,0 +1,61 @@
+# Configuración de Nginx para MedAssist
+# =====================================
+# Subdominio: medassist.autobee.cl
+# Servidor: 159.112.150.185
+#
+# INSTRUCCIONES:
+# 1. Conéctate al servidor: ssh -i ~/Downloads/ssh-key-2025-12-05.key ubuntu@159.112.150.185
+# 2. Crea el archivo de configuración: sudo nano /etc/nginx/sites-available/medassist
+# 3. Copia el contenido de abajo (desde la línea "server {")
+# 4. Habilita el sitio: sudo ln -s /etc/nginx/sites-available/medassist /etc/nginx/sites-enabled/
+# 5. Prueba la configuración: sudo nginx -t
+# 6. Reinicia Nginx: sudo systemctl reload nginx
+
+# =====================================
+# CONFIGURACIÓN NGINX (copiar desde aquí):
+# =====================================
+
+server {
+    listen 80;
+    server_name medassist.autobee.cl;
+    
+    root /var/www/medassist;
+    index index.html;
+
+    # Compresión Gzip para mejor rendimiento
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied expired no-cache no-store private auth;
+    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml application/javascript;
+
+    # Cache de archivos estáticos (1 año para assets de Next.js)
+    location /_next/static/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # Ruta principal
+    location / {
+        try_files $uri $uri/ $uri.html /index.html;
+    }
+
+    # Seguridad básica
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+}
+
+# =====================================
+# CONFIGURAR DNS EN TU PROVEEDOR:
+# =====================================
+# Tipo: A
+# Nombre: medassist
+# Valor: 159.112.150.185
+# TTL: 300 (o el mínimo disponible)
+
+# =====================================
+# HTTPS CON LET'S ENCRYPT (después de DNS):
+# =====================================
+# sudo apt install certbot python3-certbot-nginx -y
+# sudo certbot --nginx -d medassist.autobee.cl
