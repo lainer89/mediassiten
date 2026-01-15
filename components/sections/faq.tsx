@@ -8,38 +8,46 @@ import {
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion"
-import { HelpCircle, MessageCircle } from "lucide-react"
+import { HelpCircle, MessageCircle, Mail, AlertTriangle } from "lucide-react"
 
 const faqs = [
     {
-        question: "¿MedAssist me da diagnósticos médicos?",
-        answer: "No. MedAssist es una herramienta informativa que te ayuda a entender tus resultados en un lenguaje más simple. Nunca reemplaza el criterio de un profesional de la salud. Siempre consulta con tu médico para decisiones sobre tu tratamiento.",
+        question: "¿MedAssist reemplaza a mi médico?",
+        answer: "No, de ninguna manera. MedAssist es una herramienta informativa y educativa diseñada para ayudarte a entender tus resultados de laboratorio en un lenguaje más accesible. Siempre consulta con un profesional de la salud calificado para diagnósticos, tratamientos y decisiones médicas importantes.",
+        important: true
     },
     {
-        question: "¿Mi información está realmente segura?",
-        answer: "Sí. Utilizamos los mismos estándares de seguridad que usan los bancos (cifrado AES-256). Tus datos se almacenan de forma encriptada y solo tú tienes acceso a ellos. No compartimos ni vendemos tu información a terceros.",
+        question: "¿Qué tan segura está mi información médica?",
+        answer: "Tu privacidad es nuestra máxima prioridad. Utilizamos cifrado AES-256 (el mismo estándar que los bancos) tanto en tránsito como en reposo. Tus datos se almacenan en servidores seguros y ningún humano en MedAssist accede a tus exámenes. Cumplimos con estándares internacionales de protección de datos sanitarios.",
     },
     {
-        question: "¿Qué tipos de exámenes puedo subir?",
-        answer: "Actualmente soportamos la mayoría de exámenes de laboratorio clínico: hemogramas, química sanguínea, perfiles lipídicos, glucosa, entre otros. Puedes subir archivos PDF o fotos (JPG, PNG). Estamos trabajando en agregar más tipos de estudios.",
+        question: "¿Qué tipos de exámenes puedo analizar?",
+        answer: "Actualmente soportamos la mayoría de exámenes de laboratorio clínico comunes en Latinoamérica: hemogramas completos, química sanguínea, perfiles lipídicos, glucosa, función hepática, función renal, tiroides, y más. Puedes subir archivos PDF o fotos claras (JPG, PNG). Estamos expandiendo constantemente nuestra cobertura.",
     },
     {
         question: "¿Cuánto cuesta usar MedAssist?",
-        answer: "Durante la fase Beta, MedAssist es completamente gratuito. Para el lanzamiento oficial, tendremos un plan básico gratuito y planes premium con características adicionales como mayor almacenamiento e integración con WhatsApp.",
+        answer: "Durante nuestra fase Beta, MedAssist es completamente gratuito para usuarios en Latinoamérica. Para el lanzamiento oficial, mantendremos un plan básico gratuito generoso, con planes premium opcionales que incluirán mayor almacenamiento, integraciones con WhatsApp/Telegram, y análisis familiares compartidos.",
     },
     {
-        question: "¿Puedo eliminar mi información cuando quiera?",
-        answer: "Absolutamente. Tienes control total sobre tus datos. Puedes eliminar documentos individuales o borrar tu cuenta completa junto con todo tu historial en cualquier momento desde la configuración de tu perfil.",
+        question: "¿Tengo control total sobre mis datos?",
+        answer: "Absolutamente. Tus datos te pertenecen. Puedes descargar todo tu historial en cualquier momento, eliminar documentos individuales, o borrar tu cuenta completa junto con toda tu información de forma permanente. Sin letra chica ni procesos complicados.",
     },
     {
-        question: "¿Funciona sin conexión a internet?",
-        answer: "MedAssist necesita internet para procesar y analizar tus documentos de forma segura. Sin embargo, estamos desarrollando la opción de guardar documentos en tu dispositivo para que puedas revisarlos sin conexión.",
+        question: "¿MedAssist funciona con laboratorios de mi país?",
+        answer: "Sí. Nuestro sistema de reconocimiento está optimizado para los formatos de laboratorios más comunes en México, Chile, Colombia, Argentina, Perú y el resto de Latinoamérica. Si tu laboratorio no es reconocido automáticamente, nuestro sistema aprende y mejora constantemente.",
+    },
+    {
+        question: "¿Cómo sé que el análisis de IA es confiable?",
+        answer: "Nuestro modelo de IA está entrenado con guías clínicas internacionales actualizadas y validado por profesionales médicos. Cada interpretación incluye referencias a rangos normales establecidos. Sin embargo, siempre recomendamos usar MedAssist como complemento informativo, no como sustituto del criterio médico profesional.",
     },
 ]
 
 export function FAQ() {
     return (
-        <section id="faq" className="py-28 bg-muted/30 scroll-mt-20">
+        <section id="faq" className="py-32 relative overflow-hidden scroll-mt-20">
+            {/* Background */}
+            <div className="absolute inset-0 -z-10 bg-gradient-to-b from-muted/30 via-background to-background"></div>
+
             <Container className="max-w-4xl">
                 {/* Header */}
                 <motion.div
@@ -49,17 +57,23 @@ export function FAQ() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                    <motion.div
+                        className="inline-flex items-center gap-2 px-5 py-2.5 mb-8 bg-primary/10 text-primary rounded-full text-sm font-semibold border border-primary/20"
+                        whileHover={{ scale: 1.05 }}
+                    >
                         <HelpCircle className="w-4 h-4" />
-                        Preguntas frecuentes
-                    </div>
+                        Preguntas Frecuentes
+                    </motion.div>
 
-                    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-                        ¿Tienes dudas?
+                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
+                        Resolvemos tus{" "}
+                        <span className="bg-gradient-to-r from-primary to-teal-400 bg-clip-text text-transparent">
+                            dudas
+                        </span>
                     </h2>
 
-                    <p className="mt-6 text-lg text-muted-foreground">
-                        Aquí respondemos las preguntas más comunes sobre MedAssist.
+                    <p className="mt-6 text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+                        Las respuestas a las preguntas más comunes sobre seguridad, funcionamiento y uso de MedAssist.
                     </p>
                 </motion.div>
 
@@ -72,20 +86,57 @@ export function FAQ() {
                 >
                     <Accordion type="single" collapsible className="w-full space-y-4">
                         {faqs.map((faq, index) => (
-                            <AccordionItem
+                            <motion.div
                                 key={index}
-                                value={`item-${index}`}
-                                className="bg-background rounded-2xl border border-border px-6 data-[state=open]:border-primary/30 data-[state=open]:shadow-lg transition-all"
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: 0.1 + index * 0.05 }}
                             >
-                                <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-6">
-                                    {faq.question}
-                                </AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground leading-relaxed pb-6 text-base">
-                                    {faq.answer}
-                                </AccordionContent>
-                            </AccordionItem>
+                                <AccordionItem
+                                    value={`item-${index}`}
+                                    className={`bg-background rounded-2xl border ${faq.important ? 'border-amber-500/30' : 'border-border'} px-6 data-[state=open]:border-primary/40 data-[state=open]:shadow-xl data-[state=open]:shadow-primary/5 transition-all duration-300 hover:border-primary/20`}
+                                >
+                                    <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-6 group">
+                                        <div className="flex items-center gap-3">
+                                            {faq.important && (
+                                                <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0" />
+                                            )}
+                                            <span className="group-hover:text-primary transition-colors">
+                                                {faq.question}
+                                            </span>
+                                        </div>
+                                    </AccordionTrigger>
+                                    <AccordionContent className="text-muted-foreground leading-relaxed pb-6 text-base">
+                                        {faq.answer}
+                                    </AccordionContent>
+                                </AccordionItem>
+                            </motion.div>
                         ))}
                     </Accordion>
+                </motion.div>
+
+                {/* Medical Disclaimer */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="mt-12"
+                >
+                    <div className="p-6 bg-amber-500/5 rounded-2xl border border-amber-500/20">
+                        <div className="flex items-start gap-4">
+                            <AlertTriangle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-1" />
+                            <div>
+                                <h4 className="font-semibold text-foreground mb-2">Aviso Importante</h4>
+                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                    MedAssist es una herramienta de información y educación sobre salud. No proporciona diagnósticos médicos,
+                                    tratamientos ni consejos médicos profesionales. Siempre consulta a un profesional de la salud calificado
+                                    para cualquier pregunta sobre condiciones médicas o tratamientos.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
 
                 {/* Contact CTA */}
@@ -93,17 +144,19 @@ export function FAQ() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                    className="mt-16 text-center"
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                    className="mt-12 text-center"
                 >
-                    <p className="text-muted-foreground mb-4">¿No encontraste lo que buscabas?</p>
-                    <a
-                        href="mailto:contacto@medassist.lat"
-                        className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
+                    <p className="text-muted-foreground mb-4">¿Tienes una pregunta que no está aquí?</p>
+                    <motion.a
+                        href="mailto:hola@medassist.lat"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary font-semibold rounded-full border border-primary/20 hover:bg-primary/20 transition-colors"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.98 }}
                     >
-                        <MessageCircle className="w-4 h-4" />
-                        Escríbenos directamente
-                    </a>
+                        <Mail className="w-5 h-5" />
+                        Escríbenos a hola@medassist.lat
+                    </motion.a>
                 </motion.div>
             </Container>
         </section>
