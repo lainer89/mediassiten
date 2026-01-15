@@ -7,9 +7,8 @@ import { ShieldCheck, Menu, X } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const navLinks = [
-    { label: "Propósito", href: "#mision" },
-    { label: "Para Personas", href: "#personas" },
-    { label: "Para Empresas", href: "#empresas" },
+    { label: "Propósito", href: "#que-es" },
+    { label: "Soluciones", href: "#soluciones" },
     { label: "Seguridad", href: "#seguridad" },
     { label: "FAQ", href: "#faq" },
 ]
