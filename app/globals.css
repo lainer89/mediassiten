@@ -1,37 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
+  --background: #fafffe;
+  --foreground: #1a1a2e;
 
+  /* Primary: Teal vibrante y lleno de vida */
   --primary: #0d9488;
   --primary-foreground: #ffffff;
 
-  --secondary: #e2e8f0;
-  --secondary-foreground: #1e293b;
+  /* Secondary: Teal claro */
+  --secondary: #e6fffa;
+  --secondary-foreground: #134e4a;
 
-  --muted: #f8fafc;
-  --muted-foreground: #64748b;
+  /* Muted: Gris cálido */
+  --muted: #f0fdf9;
+  --muted-foreground: #475569;
 
-  --accent: #f0fdfa;
-  --accent-foreground: #0f766e;
+  /* Accent: Coral vibrante */
+  --accent: #fef3f2;
+  --accent-foreground: #dc2626;
+
+  /* Colores adicionales vibrantes */
+  --coral: #f472b6;
+  --orange: #fb923c;
+  --purple: #a78bfa;
+  --cyan: #22d3ee;
+  --emerald: #10b981;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f172a;
-    --foreground: #f8fafc;
+    --foreground: #f0fdfa;
 
-    --primary: #14b8a6;
-    --primary-foreground: #ffffff;
+    /* Primary: Teal más brillante en dark */
+    --primary: #2dd4bf;
+    --primary-foreground: #042f2e;
 
     --secondary: #1e293b;
-    --secondary-foreground: #f8fafc;
+    --secondary-foreground: #f0fdfa;
 
     --muted: #1e293b;
     --muted-foreground: #94a3b8;
 
-    --accent: #115e59;
+    --accent: #0f766e;
     --accent-foreground: #f0fdfa;
   }
 }
