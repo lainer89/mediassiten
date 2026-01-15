@@ -1,6 +1,6 @@
 # Configuración de Nginx para MedAssist
 # =====================================
-# Subdominio: medassist.autobee.cl
+# Subdominio: medassist.autobee.info
 # Servidor: 159.112.150.185
 #
 # INSTRUCCIONES:
@@ -17,7 +17,7 @@
 
 server {
     listen 80;
-    server_name medassist.autobee.cl;
+    server_name medassist.autobee.info;
     
     root /var/www/medassist;
     index index.html;
@@ -58,4 +58,4 @@ server {
 # HTTPS CON LET'S ENCRYPT (después de DNS):
 # =====================================
 # sudo apt install certbot python3-certbot-nginx -y
-# sudo certbot --nginx -d medassist.autobee.cl
+# sudo certbot --nginx -d medassist.autobee.info
