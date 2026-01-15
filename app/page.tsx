@@ -1,7 +1,6 @@
 import { Hero } from "@/components/sections/hero";
 import { Mission } from "@/components/sections/mission";
-import { ForPeople } from "@/components/sections/for-people";
-import { ForBusiness } from "@/components/sections/for-business";
+import { AudienceSelector } from "@/components/sections/audience-selector";
 import { Security } from "@/components/sections/security";
 import { Waitlist } from "@/components/sections/waitlist";
 import { FAQ } from "@/components/sections/faq";
@@ -12,14 +11,14 @@ export default function Home() {
       {/* Hero Principal */}
       <Hero />
 
-      {/* Nuestro Propósito */}
+      {/* ¿Qué es MedAssist? */}
       <Mission />
 
-      {/* ========== SECCIÓN PERSONAS ========== */}
-      <ForPeople />
-
-      {/* ========== SECCIÓN EMPRESAS ========== */}
-      <ForBusiness />
+      {/* ═══════════════════════════════════════════════════════════════
+          SELECTOR DE AUDIENCIA - SECCIÓN PRINCIPAL
+          El usuario elige su perfil y ve información específica
+      ═══════════════════════════════════════════════════════════════ */}
+      <AudienceSelector />
 
       {/* Seguridad (aplica a ambos) */}
       <Security />

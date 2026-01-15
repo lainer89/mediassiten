@@ -1,55 +1,67 @@
 'use client'
 
 import { Container } from "@/components/layout/container"
-import { Heart, Lightbulb, Users } from "lucide-react"
+import { Brain, MessageSquareText, FolderOpen, Sparkles } from "lucide-react"
+
+const pillars = [
+    {
+        icon: Brain,
+        title: "Análisis Inteligente",
+        description: "Procesamos cualquier examen de laboratorio con IA avanzada, extrayendo los valores clave automáticamente."
+    },
+    {
+        icon: MessageSquareText,
+        title: "Explicaciones Claras",
+        description: "Traducimos los resultados médicos a español simple. Sin tecnicismos, sin confusiones."
+    },
+    {
+        icon: FolderOpen,
+        title: "Historial Unificado",
+        description: "Todos tus exámenes organizados en un solo lugar. Accede cuando quieras, desde cualquier dispositivo."
+    },
+]
 
 export function Mission() {
     return (
-        <section id="mision" className="py-20 bg-white scroll-mt-20">
-            <Container className="max-w-4xl">
-                <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-teal-100 rounded-2xl mb-6">
-                        <Heart className="w-8 h-8 text-teal-600" />
+        <section id="que-es" className="py-20 bg-gradient-to-b from-white to-gray-50 scroll-mt-20">
+            <Container>
+                {/* Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-teal-50 to-emerald-100 text-teal-600 rounded-full text-sm font-semibold mb-6 border border-teal-200 shadow-sm">
+                        <Sparkles className="w-4 h-4" />
+                        Tecnología que entiende tu salud
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-                        Nuestro Propósito
+                        ¿Qué es MedAssist?
                     </h2>
 
-                    <p className="mt-6 text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                        Creemos que la <strong>inteligencia artificial no debe ser exclusiva de grandes empresas</strong>.
-                        Nuestra misión es acortar la barrera entre la tecnología y las personas,
-                        para que la IA mejore la vida de todos.
-                    </p>
-
-                    <p className="mt-4 text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-                        Queremos <strong>democratizar el conocimiento médico</strong>. Que cualquier persona
-                        pueda entender su salud sin depender de tecnicismos incomprensibles.
+                    <p className="mt-6 text-xl text-gray-600 leading-relaxed">
+                        Una plataforma de inteligencia artificial que <strong className="text-gray-900">transforma tus exámenes médicos</strong> en explicaciones claras y comprensibles. Para personas que quieren entender su salud, y para clínicas que buscan automatizar su operación.
                     </p>
                 </div>
 
-                <div className="mt-16 grid md:grid-cols-2 gap-8">
-                    <div className="bg-gray-50 p-8 rounded-xl">
-                        <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                            <Lightbulb className="w-6 h-6 text-teal-600" />
+                {/* Pillars */}
+                <div className="grid md:grid-cols-3 gap-8">
+                    {pillars.map((pillar, i) => (
+                        <div
+                            key={i}
+                            className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-teal-200 transition-all duration-300"
+                        >
+                            <div className="w-14 h-14 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-lg">
+                                <pillar.icon className="w-7 h-7 text-white" />
+                            </div>
+                            <h3 className="text-xl font-bold text-gray-900 mb-3">{pillar.title}</h3>
+                            <p className="text-gray-600 leading-relaxed">{pillar.description}</p>
                         </div>
-                        <h3 className="text-xl font-semibold text-gray-900">Tecnología para todos</h3>
-                        <p className="mt-3 text-gray-600 leading-relaxed">
-                            La IA debe integrarse en nuestra vida cotidiana para hacerla mejor,
-                            no ser una herramienta inalcanzable. Hacemos que el cambio se note.
-                        </p>
-                    </div>
+                    ))}
+                </div>
 
-                    <div className="bg-gray-50 p-8 rounded-xl">
-                        <div className="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
-                            <Users className="w-6 h-6 text-teal-600" />
-                        </div>
-                        <h3 className="text-xl font-semibold text-gray-900">Democratizar el conocimiento</h3>
-                        <p className="mt-3 text-gray-600 leading-relaxed">
-                            Transformamos información médica compleja en explicaciones claras.
-                            Porque entender tu salud es un derecho, no un privilegio.
-                        </p>
-                    </div>
+                {/* Bottom tagline */}
+                <div className="mt-16 text-center">
+                    <p className="text-gray-500 text-lg">
+                        Disponible para <span className="font-semibold text-teal-600">personas</span> y <span className="font-semibold text-indigo-600">empresas</span>
+                    </p>
                 </div>
             </Container>
         </section>
